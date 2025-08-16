@@ -2,88 +2,152 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Employee Digital Acceptance Tool</title>
+
   <style>
     :root{
-      --bg:#c8c8c8;
-      --card:#e7d9ef;
-      --ok:#2e7d32;        /* green */
-      --warn:#ef6c00;      /* amber */
-      --bad:#c62828;       /* red */
-      --text:#222;
-      --muted:#666;
+      --bg: #f7f7fb;         
+      --card: #ffffff;        
+      --text: #0f0f14;      
+      --muted: #6b7280;      
+      --border: #ececf2;      
+
+      --accent-50:  #f5f3ff;
+      --accent-100: #ede9fe;
+      --accent-300: #c4b5fd;
+      --accent-500: #8b5cf6;
+      --accent-600: #7c3aed;
+
+
+      --ok:#2e7d32;        
+      --warn:#ef6c00;    
+      --bad:#c62828;     
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      background: radial-gradient(1200px 600px at 70% -10%, var(--accent-50), transparent 50%) var(--bg);
     }
 
     body {
-      font-family: Arial, sans-serif;
-      margin: 100px;
-      background-color: var(--bg);
+      font-family: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       color: var(--text);
-    }
-    h1 {
-      text-align: center;
-      color: black;
-      font-size: 40px;
-    }
-    .section {
-      background-color: var(--card);
-      padding: 20px;
-      margin-bottom: 30px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    .question {
-      margin-bottom: 24px;
-    }
-    .question legend {
-      font-weight: normal;
-      margin-bottom: 10px;
+      margin: 0;
     }
 
-    /* Likert layout */
+    .app{
+      max-width: 980px;
+      margin: 56px auto 72px;
+      padding: 0 24px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: clamp(28px, 4vw, 40px);
+      line-height: 1.1;
+      margin: 0 0 24px;
+      letter-spacing: -0.01em;
+    }
+
+    .section {
+      background-color: var(--card);
+      padding: 22px;
+      margin-bottom: 20px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 24px rgba(17, 12, 46, 0.06);
+    }
+
+    .section > h2{
+      margin: 0 0 12px;
+      font-size: 18px;
+      font-weight: 700;
+      color: #111;
+    }
+
+    .question { margin-bottom: 18px; }
+
+    .question legend {
+      margin: 0 0 10px;
+      font-weight: 600;
+      color: #1f2937;
+      font-size: 15px;
+    }
+
+    /*Likert*/
     .likert {
       display: grid;
-      grid-template-columns: repeat(5, minmax(120px, 1fr));
+      grid-template-columns: repeat(5, minmax(130px, 1fr));
       gap: 10px;
-      align-items: center;
+      align-items: stretch;
     }
+
     .option {
       display: flex;
       align-items: center;
-      gap: 8px;
-      background: rgba(255,255,255,0.6);
-      padding: 8px 10px;
-      border-radius: 6px;
+      gap: 10px;
+      background: var(--accent-50);
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--accent-100);
+      transition: background .15s ease, border-color .15s ease, box-shadow .15s ease, transform .05s ease;
+      cursor: pointer;
+    }
+    .option:hover{
+      background: #fff;
+      border-color: var(--accent-300);
     }
     .likert input[type="radio"] {
       width: 18px;
       height: 18px;
+      accent-color: var(--accent-500);
       cursor: pointer;
+      flex: 0 0 auto;
     }
+    .option span{ font-size: 14px; }
+    .option:has(input:checked){
+      background: #fff;
+      border-color: var(--accent-500);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-500) 18%, transparent);
+    }
+    .option input:checked ~ span { font-weight: 600; } /* fallback hint */
+
+    /* Actions */
+    .form-actions{ text-align: center; }
 
     button {
-      display: block;
-      margin: 30px auto;
+      appearance: none;
       padding: 12px 22px;
       font-size: 16px;
-      background-color: #4CAF50;
+      font-weight: 600;
+      background: var(--accent-500);
       color: white;
-      border: none;
-      border-radius: 8px;
+      border: 1px solid color-mix(in srgb, var(--accent-600) 30%, transparent);
+      border-radius: 999px;
       cursor: pointer;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+      box-shadow: 0 6px 16px rgba(139, 92, 246, 0.25);
+      transition: transform .05s ease, box-shadow .15s ease, background .15s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
-    button:focus {
-      outline: 3px solid rgba(76, 175, 80, 0.35);
-      outline-offset: 2px;
+    button:hover {
+      background: var(--accent-600);
+      box-shadow: 0 8px 22px rgba(124, 58, 237, 0.30);
+    }
+    button:active { transform: translateY(1px); }
+    button:focus-visible {
+      outline: 3px solid color-mix(in srgb, var(--accent-600) 45%, transparent);
+      outline-offset: 3px;
     }
 
-    /* Modal */
     .modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.6);
+      background: rgba(9, 10, 15, 0.55);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -91,40 +155,45 @@
       opacity: 0;
       transition: opacity 0.25s ease, visibility 0.25s ease;
       padding: 24px;
+      z-index: 50;
     }
-    .modal-overlay.show {
-      visibility: visible;
-      opacity: 1;
-    }
+    .modal-overlay.show { visibility: visible; opacity: 1; }
+
     .modal {
-      background: #fff;
-      padding: 32px;
-      border-radius: 12px;
-      width: min(700px, 100%);
+      background: var(--card);
+      padding: 28px 24px;
+      border-radius: 16px;
+      width: min(720px, 100%);
       text-align: left;
-      box-shadow: 0 0 24px rgba(0,0,0,0.35);
+      box-shadow: 0 30px 60px rgba(16, 13, 36, 0.25);
+      border: 1px solid var(--border);
       max-height: 90vh;
       overflow: auto;
     }
+
     .modal h2 {
       margin: 0 0 6px;
-      font-size: 28px;
-      color: #111;
+      font-size: 26px;
+      color: #0f0f14;
       text-align: center;
+      letter-spacing: -0.01em;
     }
+
     .modal .sub {
       margin: 0 0 20px;
       text-align: center;
       color: var(--muted);
       font-size: 14px;
     }
+
     .score-row{
-      background: #fafafa;
-      border: 1px solid #eee;
-      border-radius: 10px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
       padding: 14px 16px;
       margin: 12px 0;
     }
+
     .score-top{
       display:flex;
       justify-content: space-between;
@@ -132,14 +201,13 @@
       gap: 12px;
       flex-wrap: wrap;
     }
-    .score-title{
-      font-weight: 600;
-      font-size: 16px;
-    }
+
+    .score-title{ font-weight: 700; font-size: 15px; }
+
     .badge{
       padding: 4px 10px;
       border-radius: 999px;
-      font-size: 13px;
+      font-size: 12px;
       color:#fff;
       white-space: nowrap;
     }
@@ -150,7 +218,8 @@
     .bar{
       position: relative;
       height: 12px;
-      background: #eee;
+      background: var(--accent-50);
+      border: 1px solid var(--accent-100);
       border-radius: 999px;
       overflow: hidden;
       margin-top: 10px;
@@ -159,8 +228,7 @@
       display:block;
       height:100%;
       width:0%;
-      background:#999;
-      border-radius: 999px;
+      border-radius: inherit;
       transition: width 0.6s ease;
     }
     .bar > span.ready{ background: var(--ok); }
@@ -183,6 +251,7 @@
     .key .dot{
       width:12px; height:12px; border-radius:50%;
       background:#ccc;
+      border: 1px solid var(--border);
     }
     .key .dot.ready{ background: var(--ok); }
     .key .dot.support{ background: var(--warn); }
@@ -194,24 +263,34 @@
       margin-top: 22px;
     }
     .modal .actions button{
-      background:#333;
+      background: #111;
+      border-color: #111;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.25);
     }
 
-    @media (max-width: 720px){
-      body { margin: 24px; }
+    /* Responsive */
+    @media (max-width: 900px){
       .likert{ grid-template-columns: 1fr; }
+    }
+    @media (max-width: 720px){
+      .app { margin: 32px auto 56px; padding: 0 16px; }
+      .modal { padding: 22px 18px; }
     }
   </style>
 </head>
 <body>
-  <h1>Employee Digital Acceptance Tool</h1>
+  <main class="app">
+    <h1 id="formTitle">Employee Digital Acceptance Tool</h1>
 
-  <form id="surveyForm" aria-labelledby="formTitle">
-    <div id="formSections"></div>
-    <button type="submit">Submit Survey</button>
-  </form>
+    <form id="surveyForm" aria-labelledby="formTitle">
+      <div id="formSections"></div>
+      <div class="form-actions">
+        <button type="submit">Submit Survey</button>
+      </div>
+    </form>
+  </main>
 
-  <!-- Results Modal -->
+  <!-- Results -->
   <div id="scoreModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal">
       <h2 id="modalTitle">Technology Acceptance Scores</h2>
@@ -283,7 +362,6 @@
 
     const formSections = document.getElementById("formSections");
 
-    // Build sections with radio buttons
     Object.entries(questions).forEach(([domain, qs]) => {
       const section = document.createElement("div");
       section.className = "section";
@@ -335,9 +413,7 @@
       formSections.appendChild(section);
     });
 
-    // Helpers for evaluation
     function getCategory(score){
-      // score is 0-100 integer
       if (score <= 40) return { label: "High Resistance", cls: "resist" };
       if (score <= 70) return { label: "Needs Support", cls: "support" };
       return { label: "Ready Adopter", cls: "ready" };
@@ -357,7 +433,6 @@
         });
       });
 
-      // Build results UI
       const parts = Object.keys(scores).map(domain => {
         const pct = Math.round(scores[domain] / maxScores[domain] * 100);
         const { label, cls } = getCategory(pct);
