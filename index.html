@@ -113,9 +113,8 @@
       border-color: var(--accent-500);
       box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-500) 18%, transparent);
     }
-    .option input:checked ~ span { font-weight: 600; } /* fallback hint */
+    .option input:checked ~ span { font-weight: 600; }
 
-    /* Actions */
     .form-actions{ text-align: center; }
 
     button {
@@ -268,7 +267,6 @@
       box-shadow: 0 6px 16px rgba(0,0,0,0.25);
     }
 
-    /* Responsive */
     @media (max-width: 900px){
       .likert{ grid-template-columns: 1fr; }
     }
@@ -313,31 +311,31 @@
     const questions = {
       Psychological: [
         "I have a positive outlook on using new technologies in my job?",
-        "Using new technologies makes my work more interesting?",
-        "I believe technology enhances my productivity?",
+        "I believe technology enhances the quality of my work?",
+        "I am open to using new technology at work?",
         "I feel confident in my ability to learn how to use new technologies?",
-        "I can troubleshoot technology problems on my own?",
-        "I am capable of adapting to new digital tools quickly?",
+        "I can adapt quickly when new digital tools are introduced in my workplace?",
+        "I believe I can keep up with digital changes in the workplace?",
         "I actively seek out opportunities to use new technologies at work?",
-        "I take the initiative to learn about new workplace technologies?",
-        "I often volunteer to try out new systems or digital tools?",
-        "I can manage competing demands and still remain open to change?",
-        "I feel comfortable dealing with uncertainty during digital transitions?",
-        "I view conflicting demands during change as an opportunity to grow?"
+        "I suggest digital solutions when I notice workplace challenges?",
+        "I try to stay ahead by learning about upcoming technologies relevant to my field?",
+        "I can focus on the positives even when changes bring challenges?",
+        "I see uncertainty in digital change as a chance to develop new skills?",
+        "I can handle conflicting work demands and remain open to change?"
       ],
       Technological: [
-        "I believe this technology will make my job easier?",
-        "This technology will improve the quality of my work?",
-        "Using this technology will increase my productivity?",
-        "This technology will help me perform tasks more efficiently?",
-        "I expect my performance to improve by using this technology?",
-        "The technology will enable me to accomplish tasks more quickly?",
-        "I believe learning to use this technology will be easy for me?",
-        "It will require minimal effort to use this technology effectively?",
-        "I find the technology straightforward to operate?",
+        "I believe using technology in my job makes my work easier?",
+        "Technology increases the value of the work I produce?",
+        "Using technology allows me to perform tasks that would otherwise be difficult?",
+        "I expect technology to improve the speed at which I can complete my tasks?",
+        "The use of technology will improve my performance and productivity?",
+        "I believe using new technology will help me achieve better results?",
+        "Learning to use new technologies is easy for me?",
+        "It requires minimal effort for me to use technology effectively?",
+        "I find most workplace technologies straightforward to operate?",
         "I am comfortable using digital tools relevant to my job?",
-        "I can quickly learn new digital platforms?",
-        "I possess the necessary digital skills to succeed in my role?"
+        "I possess the necessary digital skills to use workplace technologies successfully?",
+        "24.	I have the technology knowledge necessary for my job?"
       ],
       Organisational: [
         "I trust that management introduces technology with employee interest in mind?",
