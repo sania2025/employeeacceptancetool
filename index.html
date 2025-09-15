@@ -288,7 +288,6 @@
     </form>
   </main>
 
-  <!-- Results -->
   <div id="scoreModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal">
       <h2 id="modalTitle">Technology Acceptance Scores</h2>
@@ -335,7 +334,7 @@
         "I find most workplace technologies straightforward to operate?",
         "I am comfortable using digital tools relevant to my job?",
         "I possess the necessary digital skills to use workplace technologies successfully?",
-        "24.	I have the technology knowledge necessary for my job?"
+        "I have the technology knowledge necessary for my job?"
       ],
       Organisational: [
         "I trust that management introduces technology with employee interest in mind?",
@@ -450,7 +449,7 @@
       document.getElementById("scoreContent").innerHTML = parts.join("");
       document.getElementById("scoreModal").classList.add("show");
 
-      // Move focus to modal for accessibility
+  
       document.getElementById("closeModal").focus();
     });
 
@@ -458,7 +457,6 @@
       document.getElementById("scoreModal").classList.remove("show");
     });
 
-    // Close on overlay click or ESC
     document.getElementById("scoreModal").addEventListener("click", (e)=>{
       if(e.target.id === "scoreModal"){
         document.getElementById("scoreModal").classList.remove("show");
